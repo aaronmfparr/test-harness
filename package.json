@@ -1,0 +1,18 @@
+{
+  "name": "test-harness",
+  "version": "0.1.1",
+  "description": "Execute tests via command line against a build.",
+  "main": "./src/index",
+  "author": "Blackstorm Labs",
+  "license": "ISC",
+  "scripts": {
+    "test": "npm run test:test-harness",
+    "test:test-harness": "DEBUG='test-harness*' HOST=$PWD/tests/test-harness/dummyServer.html ./node_modules/mocha/bin/mocha --bail tests/ tests/test-harness/"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "mocha": "^5.1.1",
+    "node-env-file": "^0.1.8",
+    "selenium-webdriver": "^3.6.0"
+  }
+}

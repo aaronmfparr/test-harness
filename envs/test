@@ -1,0 +1,3 @@
+export IS_TEST='true'
+export IS_AUTOMATED='true'
+export FB_INSTANT_USE_MOCK_DATA='true'

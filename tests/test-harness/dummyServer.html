@@ -1,0 +1,54 @@
+<html>
+<script>
+
+const LS_KEY = 'QA_amplitude';
+
+
+const addAnalyticsEvent = function (event) {
+  console.log('addAnalyticsEvent: event=', event);
+
+  let existing = [];
+  // Load existing
+  const existingRaw = localStorage.getItem(LS_KEY);
+  if (existingRaw) {
+    existing = JSON.parse(existingRaw).events;
+  }
+  // Add to existing
+  existing.push(event);
+  // Store existing
+  localStorage.setItem(LS_KEY, JSON.stringify({
+    events: existing
+  }));
+};
+
+
+const main = function () {
+  console.log('Hello world: sanity.html');
+  // Clear any existing stuff
+  localStorage.clear();
+
+  addAnalyticsEvent({ name: 'StartupEvent1', event: {} });
+  addAnalyticsEvent({ name: 'StartupEvent2', event: {} });
+  setTimeout(() => {
+    addAnalyticsEvent({ name: 'FirstEntry', event: {} });
+  }, 1000);
+  setTimeout(() => {
+    addAnalyticsEvent({
+      name: 'RandomGameError',
+      event: {
+        errorCode: 1,
+        errorMessage: 'its an error',
+        errorStack: 'its an error stack\n\tjust stackin it'
+      }
+    });
+  }, 1500);
+  setTimeout(() => {
+    addAnalyticsEvent({ name: 'GameComplete', event: {} });
+  }, 2000);
+};
+
+
+main();
+
+</script>
+</html>
